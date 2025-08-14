@@ -5,31 +5,31 @@ API simples de e-commerce com Flask, pronta para testes no Postman.
 ## Rodando o projeto
 
 1. Clone o repositório:
-```bash
-git clone https://github.com/seuusuario/seurepositorio.git
-cd seurepositorio
-Crie e ative o ambiente virtual:
+```
+git clone https://github.com/Ferigoti/flask-ecommerce.git
+cd flask-ecommerce
+```
+2. Crie e ative o ambiente virtual:
 
-bash
-Copiar
-Editar
+```
 python -m venv venv
 # Windows
 venv\Scripts\activate
 # Linux/Mac
 source venv/bin/activate
-Instale as dependências:
+```
+3. Instale as dependências:
 
-bash
-Copiar
-Editar
+```
 pip install -r requirements.txt
-Rode a aplicação:
+```
 
-bash
-Copiar
-Editar
+4. Rode a aplicação:
+
+```
 python app.py
+```
+
 API disponível em: http://127.0.0.1:5000
 
 Testes no Postman

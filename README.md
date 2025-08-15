@@ -13,8 +13,10 @@ cd flask-ecommerce
 
 ```
 python -m venv venv
+
 # Windows
 venv\Scripts\activate
+
 # Linux/Mac
 source venv/bin/activate
 ```
@@ -27,7 +29,7 @@ pip install -r requirements.txt
 4. Rode a aplicação:
 
 ```
-python app.py
+python application.py
 ```
 
 API disponível em: http://127.0.0.1:5000

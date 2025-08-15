@@ -1,65 +1,126 @@
-# API E-commerce com Flask
+# E-commerce API com Flask
 
-API simples de e-commerce com Flask, pronta para testes no Postman.
+API de e-commerce desenvolvida em **Python** com **Flask**, pronta para testes e uso local.
 
-## Rodando o projeto
+---
 
-1. Clone o repositório:
+## Tecnologias
+
+- Python 3
+- Flask
+- Flask SQLAlchemy
+- Flask-Login
+- Flask-CORS
+- SQLite (banco de dados local)
+- dotenv (para variáveis de ambiente)
+- Swagger (documentação da API)
+
+---
+
+## Estrutura do projeto
+
+E-COMMERCE-PROJECT/
+│
+├─ instance/
+│ └─ ecommerce.db # Banco de dados SQLite
+│
+├─ .env-example # Modelo do arquivo .env
+├─ application.py # Aplicação principal
+├─ requirements.txt # Dependências do projeto
+├─ swagger.yaml # Documentação da API
+└─ .gitignore
+
+---
+
+## Pré-requisitos
+
+- Python 3
+- Git (opcional, para clonar o repositório)
+
+---
+
+## Instalação
+
+1. **Clonar o repositório**:
 ```
-git clone https://github.com/Ferigoti/flask-ecommerce.git
-cd flask-ecommerce
+git clone https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git
+cd NOME_DO_REPOSITORIO
 ```
-2. Crie e ative o ambiente virtual:
 
+2. Criar e ativar o ambiente virtual:
 ```
-python -m venv venv
+python -m venv .venv
 
 # Windows
-venv\Scripts\activate
+.venv\Scripts\activate
 
-# Linux/Mac
-source venv/bin/activate
+# Linux / Mac
+source .venv/bin/activate
 ```
-3. Instale as dependências:
 
+3. Instalar as dependências:
 ```
 pip install -r requirements.txt
 ```
 
-4. Rode a aplicação:
+4. Criar o arquivo .env com base no .env-example:
+```
+SECRET_KEY=minha_chave_123
+DATABASE_URL=sqlite:///instance/ecommerce.db
+```
 
+5. Criar o banco de dados (primeira vez que for rodar):
+```
+from application import db
+db.create_all()
+```
+
+Rodando a aplicação
 ```
 python application.py
 ```
 
-API disponível em: http://127.0.0.1:5000
+A API estará disponível em:
+```
+http://127.0.0.1:5000/
+```
 
-Testes no Postman
-Usuário
-Registro: POST /register
+Endpoints principais
 
-Login: POST /login
+Autenticação
 
-Logout: POST /logout
+POST /login – Login do usuário
+
+POST /logout – Logout do usuário
 
 Produtos
-Adicionar: POST /api/products/add
 
-Atualizar: PUT /api/products/update/<id>
+GET /api/products – Listar produtos
 
-Deletar: DELETE /api/products/delete/<id>
+GET /api/products/<id> – Detalhes do produto
 
-Listar: GET /api/products
+POST /api/products/add – Adicionar produto (login required)
 
-Detalhes: GET /api/products/<id>
+PUT /api/products/update/<id> – Atualizar produto (login required)
+
+DELETE /api/products/delete/<id> – Deletar produto (login required)
 
 Carrinho
-Adicionar item: POST /api/cart/add/<product_id>
 
-Remover item: DELETE /api/cart/remove/<product_id>
+POST /api/cart/add/<product_id> – Adicionar item ao carrinho (login required)
 
-Ver carrinho: GET /api/cart
+DELETE /api/cart/remove/<product_id> – Remover item do carrinho (login required)
 
-Checkout: POST /api/cart/checkout
+GET /api/cart – Visualizar carrinho (login required)
 
-O banco SQLite (ecommerce.db) é criado automaticamente.
+POST /api/cart/checkout – Finalizar compra (login required)
+
+Observações
+
+O projeto utiliza SQLite como banco local, não precisa de usuário ou senha.
+
+Para usar outro banco (PostgreSQL, MySQL), altere DATABASE_URL no .env.
+
+As senhas não estão criptografadas — não use em produção.
+
+A documentação da API está em swagger.yaml.

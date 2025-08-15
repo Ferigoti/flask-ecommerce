@@ -48,10 +48,10 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-4. Criar o arquivo .env com base no .env-example:
+4. Copiar o arquivo .env-example como .env e inserir as informações necessárias:
 ```
-SECRET_KEY=minha_chave_123
-DATABASE_URL=sqlite:///instance/ecommerce.db
+cp .env-example .env
+
 ```
 
 5. Criar o banco de dados (primeira vez que for rodar):

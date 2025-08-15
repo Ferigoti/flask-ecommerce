@@ -17,21 +17,6 @@ API de e-commerce desenvolvida em **Python** com **Flask**, pronta para testes e
 
 ---
 
-## Estrutura do projeto
-
-E-COMMERCE-PROJECT/
-│
-├─ instance/
-│ └─ ecommerce.db # Banco de dados SQLite
-│
-├─ .env-example # Modelo do arquivo .env
-├─ application.py # Aplicação principal
-├─ requirements.txt # Dependências do projeto
-├─ swagger.yaml # Documentação da API
-└─ .gitignore
-
----
-
 ## Pré-requisitos
 
 - Python 3
@@ -43,8 +28,8 @@ E-COMMERCE-PROJECT/
 
 1. **Clonar o repositório**:
 ```
-git clone https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git
-cd NOME_DO_REPOSITORIO
+git clone https://github.com/Ferigoti/flask-ecommerce.git
+cd flask-ecommerce
 ```
 
 2. Criar e ativar o ambiente virtual:

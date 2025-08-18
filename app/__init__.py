@@ -39,9 +39,12 @@ def create_app():
     application.register_blueprint(cart_bp, url_prefix='/api/cart')
 
     with application.app_context():
-        # Descomente a linha abaixo na primeira vez que rodar o projeto
-        # para criar as tabelas no banco de dados.
-        # db.create_all()
-        print("Banco de dados conectado!")
+        db.create_all()
+        admin_user = User.query.filter_by(username='admin').first()
+        if not admin_user:
+            admin_user = User(username='admin', password='123')
+            db.session.add(admin_user)
+            db.session.commit()
+        print("Banco de dados conectado e usuário admin verificado!")
 
     return application

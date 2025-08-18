@@ -1,111 +1,187 @@
-# E-commerce API com Flask
+API de E-commerce em Flask
+📖 Sobre o Projeto
+Esta é uma API RESTful para um sistema de e-commerce desenvolvida em Python com o framework Flask. O projeto serve como um backend robusto para gerenciar usuários, produtos e carrinhos de compras, seguindo as melhores práticas de desenvolvimento, como a estrutura de Application Factory e Blueprints para organização do código.
 
-API de e-commerce desenvolvida em **Python** com **Flask**, pronta para testes e uso local.
+Este projeto foi criado para demonstrar habilidades em desenvolvimento de APIs, modelagem de dados e autenticação de usuários.
 
----
+✨ Funcionalidades
+Autenticação de Usuários: Sistema de login e logout baseado em sessão. Rotas protegidas que exigem autenticação.
 
-## Tecnologias
+Gerenciamento de Produtos (CRUD):
 
-- Python 3
-- Flask
-- Flask SQLAlchemy
-- Flask-Login
-- Flask-CORS
-- SQLite (banco de dados local)
-- dotenv (para variáveis de ambiente)
-- Swagger (documentação da API)
+Adicionar novos produtos.
 
----
+Visualizar todos os produtos ou um produto específico.
 
-## Pré-requisitos
+Atualizar informações de um produto.
 
-- Python 3
-- Git (opcional, para clonar o repositório)
+Remover produtos.
 
----
+Gerenciamento de Carrinho de Compras:
 
-## Instalação
+Adicionar itens ao carrinho de um usuário autenticado.
 
-1. **Clonar o repositório**:
-```
+Visualizar o conteúdo do carrinho.
+
+Remover itens do carrinho.
+
+Realizar um "checkout" (limpando o carrinho).
+
+🛠️ Tecnologias Utilizadas
+Backend:
+
+Python 3
+
+Flask: Micro-framework para a construção da API.
+
+Flask-SQLAlchemy: ORM para interação com o banco de dados.
+
+Flask-Login: Gerenciamento de sessão e autenticação de usuários.
+
+Flask-CORS: Para permitir requisições de diferentes origens (front-end).
+
+python-dotenv: Para gerenciamento de variáveis de ambiente.
+
+Banco de Dados:
+
+SQLite: Banco de dados padrão para desenvolvimento.
+
+Ferramentas:
+
+Postman: Utilizado para testar e interagir com os endpoints da API.
+
+🚀 Como Executar o Projeto
+Siga os passos abaixo para rodar a aplicação localmente.
+
+Pré-requisitos
+Python 3.9+
+
+pip (gerenciador de pacotes do Python)
+
+Instalação
+Clone o repositório:
+
+Bash
+
 git clone https://github.com/Ferigoti/flask-ecommerce.git
 cd flask-ecommerce
-```
+Crie e ative um ambiente virtual:
 
-2. Criar e ativar o ambiente virtual:
-```
-python -m venv .venv
+Bash
 
 # Windows
-.venv\Scripts\activate
+python -m venv venv
+.\venv\Scripts\activate
 
-# Linux / Mac
-source .venv/bin/activate
-```
+# macOS / Linux
+python3 -m venv venv
+source venv/bin/activate
+Instale as dependências:
 
-3. Instalar as dependências:
-```
+Bash
+
 pip install -r requirements.txt
-```
+Configure as variáveis de ambiente:
 
-4. Criar o arquivo .env com base no .env-example:
-```
-SECRET_KEY=minha_chave_123
-DATABASE_URL=sqlite:///instance/ecommerce.db
-```
+Crie uma cópia do arquivo .env-example e renomeie para .env. Os valores padrão são suficientes para rodar localmente.
 
-5. Criar o banco de dados (primeira vez que for rodar):
-```
-from application import db
-db.create_all()
-```
+Bash
 
-Rodando a aplicação
-```
-python application.py
-```
+# Windows
+copy .env-example .env
 
-A API estará disponível em:
-```
-http://127.0.0.1:5000/
-```
+# macOS / Linux
+cp .env-example .env
+Execute a aplicação:
 
-Endpoints principais
+Bash
 
+python run.py
+Na primeira vez que a aplicação for executada, o banco de dados ecommerce.db será criado automaticamente na raiz do projeto.
+
+Além disso, um usuário administrador padrão é inserido no banco para facilitar os testes:
+
+Usuário: admin
+
+Senha: 123
+
+A API estará rodando em http://127.0.0.1:5000.
+
+⚡ Usando a API com Postman
+A melhor forma de testar a API é através do Postman.
+
+Dica Importante: O Postman gerencia cookies de sessão automaticamente. Após fazer uma requisição de POST /login com sucesso, ele salvará o cookie de autenticação e o enviará nas requisições seguintes, permitindo o acesso às rotas protegidas.
+
+Endpoints da API
 Autenticação
+POST /login
 
-POST /login – Login do usuário
+Descrição: Autentica um usuário e inicia uma sessão.
 
-POST /logout – Logout do usuário
+Usuário Administrador Padrão (criado na primeira execução):
 
-Produtos
+username: admin
 
-GET /api/products – Listar produtos
+password: 123
 
-GET /api/products/<id> – Detalhes do produto
+Body (JSON):
 
-POST /api/products/add – Adicionar produto (login required)
+JSON
 
-PUT /api/products/update/<id> – Atualizar produto (login required)
+{
+  "username": "admin",
+  "password": "123"
+}
+POST /logout
 
-DELETE /api/products/delete/<id> – Deletar produto (login required)
+Descrição: Encerra a sessão do usuário. Requer autenticação.
 
-Carrinho
+Produtos (requer autenticação para POST, PUT, DELETE)
+GET /api/products
 
-POST /api/cart/add/<product_id> – Adicionar item ao carrinho (login required)
+Descrição: Retorna uma lista de todos os produtos.
 
-DELETE /api/cart/remove/<product_id> – Remover item do carrinho (login required)
+GET /api/products/<int:product_id>
 
-GET /api/cart – Visualizar carrinho (login required)
+Descrição: Retorna os detalhes de um produto específico.
 
-POST /api/cart/checkout – Finalizar compra (login required)
+POST /api/products/add
 
-Observações
+Descrição: Adiciona um novo produto.
 
-O projeto utiliza SQLite como banco local, não precisa de usuário ou senha.
+Body (JSON):
 
-Para usar outro banco (PostgreSQL, MySQL), altere DATABASE_URL no .env.
+JSON
 
-As senhas não estão criptografadas — não use em produção.
+{
+  "name": "Notebook Gamer",
+  "price": 5999.90,
+  "description": "Notebook com placa de vídeo dedicada."
+}
+PUT /api/products/update/<int:product_id>
 
-A documentação da API está em swagger.yaml.
+Descrição: Atualiza um produto existente.
+
+DELETE /api/products/delete/<int:product_id>
+
+Descrição: Deleta um produto.
+
+Carrinho (requer autenticação)
+GET /api/cart
+
+Descrição: Exibe todos os itens no carrinho do usuário logado.
+
+POST /api/cart/add/<int:product_id>
+
+Descrição: Adiciona um produto ao carrinho.
+
+DELETE /api/cart/remove/<int:product_id>
+
+Descrição: Remove um item do carrinho.
+
+POST /api/cart/checkout
+
+Descrição: Finaliza a compra e limpa o carrinho.
+
+✒️ Autor
+Feito com ❤️ por João Ferigoti.

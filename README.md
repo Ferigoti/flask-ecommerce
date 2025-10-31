@@ -61,7 +61,6 @@ Siga os passos abaixo para rodar a aplicação localmente.
 ```Bash
 git clone https://github.com/Ferigoti/flask-ecommerce.git
 cd flask-ecommerce
-Crie e ative um ambiente virtual:
 ```
 
 2. Crie e ative um ambiente virtual:
